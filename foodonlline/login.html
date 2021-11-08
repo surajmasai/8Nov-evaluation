@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <div id="navbarD"></div>
+
+    <div id="login">
+        <form onsubmit="Login(event)" id="login-form">
+
+
+            <input type="text" id="pass" placeholder="password" />
+            <input type="text" id="user" placeholder="username" />
+
+            <input type="submit" />
+
+        </form>
+    </div>
+
+</body>
+
+</html>
+<script type="module">
+    import navbar from "./component/navbar.js";
+    let navbar_div = document.getElementById("navbarD");
+    navbar_div.innerHTML = navbar()
+</script>
+<script>
+    function Login(e) {
+
+        e.preventDefault();
+
+        let form = document.getElementById("login-form");
+
+        let user_data = {
+
+            username: form.user.value,
+
+            password: form.pass.value,
+
+        };
+
+        let data_to_send = JSON.stringify(user_data);
+        // console.log(data_to_send)
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+
+            method: "POST",
+
+            body: data_to_send,
+
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                console.log(res);
+                alert('login successful')
+
+                // fetchmyData(user_data.username, res.token)
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+    }
+
+
+    function fetchmyData(username, token) {
+
+        fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`, {
+
+            headers: {
+                "Content-Type": "application/json",
+
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                console.log(res);
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+    }
+</script>

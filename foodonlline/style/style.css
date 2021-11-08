@@ -1,0 +1,30 @@
+#navbar {
+  width: 90%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* border: solid 1px black; */
+  margin: auto;
+}
+
+#navbar > div {
+  display: grid;
+  grid-template-columns: 60% 60% 20%;
+}
+#logo_img {
+  width: 100px;
+}
+
+#options {
+  display: grid;
+  grid-template-columns: 80% 80% 40%;
+}
+
+#query {
+  width: 80%;
+  height: 30px;
+  margin-top: 15px;
+}
+
+#btn {
+  height: 30px;
+}
